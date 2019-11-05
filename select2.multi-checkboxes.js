@@ -15,6 +15,7 @@
 	var values = self.$element.val();
     self.$element.removeAttr('multiple');
     self.select2 = self.$element.select2({
+      data: options.data,
       allowClear: true,
       minimumResultsForSearch: options.minimumResultsForSearch,
       placeholder: options.placeholder,
@@ -39,9 +40,8 @@
     self.select2.$results.off("mouseup").on("mouseup", ".select2-results__option[aria-selected]", (function(self) {
       return function(evt) {
         var $this = $(this);
-	
-	const Utils = $.fn.select2.amd.require('select2/utils')
-        var data = Utils.GetData(this, 'data');
+
+        var data = $this.data('data');
 
         if ($this.attr('aria-selected') === 'true') {
           self.trigger('unselect', {

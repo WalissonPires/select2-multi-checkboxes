@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css">
+    
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+    <script src="../select2.multi-checkboxes.js"></script>
+
+    <style>
+
+        .select2-results__option .wrap:before{
+            font-family:fontAwesome;
+            color:#999;
+            content:"\f096";
+            width:25px;
+            height:25px;
+            padding-right: 10px;
+            
+        }
+        .select2-results__option[aria-selected=true] .wrap:before{
+            content:"\f14a";
+        }
+
+
+        .row {
+            padding: 20px;
+        }
+
+        .row select {
+            width: 100%;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="row">
+        <label>Teste</label>
+        <select id="names" multiple></select>
+    </div>
+
+    <script>
+    
+        function createSelect() {
+
+            var $selNames = $('#names');
+
+            $selNames.select2MultiCheckboxes({
+                data: [
+                    { id: 1, text: 'Person 1', data: { info: 'Additional data 1' } },
+                    { id: 2, text: 'Person 2', data: { info: 'Additional data 2' } },
+                    { id: 3, text: 'Person 3', data: { info: 'Additional data 3' } },
+                ],
+                templateSelection: function(selected, total) {
+                return "Selected " + selected.length + " of " + total;
+                }
+            });
+
+            $selNames.change(function (e) {
+
+                var selectedsData = $(e.currentTarget).select2('data');
+
+                console.log('selected data', selectedsData);
+            });
+        }
+
+        
+        createSelect();
+
+    </script>
+</body>
+</html>
