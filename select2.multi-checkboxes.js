@@ -26,7 +26,9 @@
       templateResult: function(result) {
         if (result.loading !== undefined)
           return result.text;
-        return $('<div>').text(result.text).addClass(self.options.wrapClass);
+        return result.html
+				? $('<div>').html(result.html).addClass(self.options.wrapClass)
+				: $('<div>').text(result.text).addClass(self.options.wrapClass);
       },
       matcher: function(params, data) {
         var original_matcher = $.fn.select2.defaults.defaults.matcher;
